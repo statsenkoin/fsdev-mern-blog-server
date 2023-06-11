@@ -4,6 +4,9 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 
+const authRouter = require('./routes/auth');
+const postsRouter = require('./routes/posts');
+
 const app = express();
 
 // middlewares
@@ -19,9 +22,8 @@ app.use(
 );
 
 // routes
-app.get('/', (req, res) => {
-  res.json({ message: 'Test GET' });
-});
+app.use('/api/users', authRouter);
+app.use('/api/posts', postsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
