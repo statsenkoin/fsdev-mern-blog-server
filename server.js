@@ -1,22 +1,32 @@
-const mongoose = require('mongoose');
+const express = require('express');
+const cors = require('cors');
+const logger = require('morgan');
+
 require('dotenv').config();
+const { logToFile, connectDataBase } = require('./config/server');
 
-const app = require('./app');
+const { authRouter, postsRouter } = require('./routes');
+const { handleRouteNotFound, handleError } = require('./middlewares');
 
-mongoose.set('strictQuery', true);
+const server = express();
 
-const { PORT, MONGO_DB_HOST } = process.env;
+// middlewares
+server.use(cors());
+server.use(express.json());
+server.use(logger('dev'));
+server.use(logger('combined', logToFile));
 
-mongoose
-  .connect(MONGO_DB_HOST)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(
-        `Database connection successful. Server started on port ${PORT}`
-      );
-    });
-  })
-  .catch((err) => {
-    console.log(`Database connection failed -> ${err.message}`);
-    process.exit(1);
-  });
+// routes
+server.use('/api/users', authRouter);
+server.use('/api/posts', postsRouter);
+
+// handle errors
+server.use(handleRouteNotFound);
+server.use(handleError);
+
+connectDataBase();
+
+const { PORT } = process.env;
+server.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});

@@ -18,3 +18,9 @@
 - install packages: joi, bcrypt, jsonwebtoken
 - mongoose model, joi validation
 - auth requests: register, login, logout (checkAuth), current (checkAuth)
+
+4. Refactoring
+
+- create config folder (server config (DB connection, logger), constants)
+- create services (models, schemas)
+- add server handle errors middlewares
