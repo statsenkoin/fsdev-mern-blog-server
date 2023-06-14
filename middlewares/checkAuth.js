@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { User } = require('../models');
+const { User } = require('../services/models');
 const { customError } = require('../utils');
 
 const { JWT_SECRET_KEY } = process.env;
@@ -9,7 +9,7 @@ const checkAuth = async (req, res, next) => {
   try {
     const { authorization = '' } = req.headers;
     const [tokenType, token] = authorization.split(' ');
-    
+
     if (tokenType !== 'Bearer') {
       throw customError(400, 'Invalid token type');
     }
