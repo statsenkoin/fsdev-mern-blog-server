@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const { handleMongooseError } = require('../utils');
-const { emailRegExp } = require('../constants');
+const { handleMongooseError } = require('../../utils');
+const { emailRegExp } = require('../../config/constants');
 
 const userSchema = new mongoose.Schema(
   {
