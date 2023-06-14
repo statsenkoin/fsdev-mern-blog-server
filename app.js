@@ -4,8 +4,7 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 
-const authRouter = require('./routes/auth');
-const postsRouter = require('./routes/posts');
+const { authRouter, postsRouter } = require('./routes');
 
 const app = express();
 
