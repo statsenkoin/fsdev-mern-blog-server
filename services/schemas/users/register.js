@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { emailRegExp } = require('../../constants');
+const { emailRegExp } = require('../../../config/constants');
 
 const register = Joi.object({
   username: Joi.string(),
