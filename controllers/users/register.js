@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const { User } = require('../../models');
+const { User } = require('../../services/models');
 const { ctrlWrapper, customError } = require('../../utils');
 
 const register = async (req, res, next) => {
