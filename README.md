@@ -12,3 +12,9 @@
 
 - base routes: auth/users, posts
 - controllers: users, posts
+
+3. Registeration/Login
+
+- install packages: joi, bcrypt, jsonwebtoken
+- mongoose model, joi validation
+- auth requests: register, login, logout (checkAuth), current (checkAuth)
