@@ -22,7 +22,12 @@ const login = async (req, res, next) => {
   const token = jwt.sign(jwtPayload, JWT_SECRET_KEY, { expiresIn: '24h' });
   await User.findByIdAndUpdate(user._id, { token });
 
-  res.status(200).json({ token, email });
+  res.status(200).json({
+    username: user.username,
+    email,
+    token,
+    message: 'Login successful',
+  });
 };
 
 module.exports = { login: ctrlWrapper(login) };
